@@ -7,15 +7,23 @@ import java.lang.annotation.Target;
 
 /**
  * 单参数注解 api
+ *
  * @since 1.0.0
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Param {
+    String in() default "query";
+
     String name() default "";
+
     String description() default "";
+
     boolean required() default false;
+
     String dataType() default "";
+
     String format() default "";
+
     String defaultValue() default "";
 }

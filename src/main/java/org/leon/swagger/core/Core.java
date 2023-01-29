@@ -17,6 +17,7 @@ import java.util.Set;
 
 /**
  * Swagger 注解实现核心
+ *
  * @since 1.0.0
  */
 class Core {
@@ -48,11 +49,15 @@ class Core {
         Param[] params = apiOperation.value();
         for (Param apiParam : params) {
             if (apiParam.dataType().equals("file")) {
-                apiMethod.addParameter(new Path.Parameter(apiParam.name(),"formData",apiParam.description(),apiParam.required(),apiParam.dataType(),apiParam.format(),apiParam.defaultValue()));
+                apiMethod.addParameter(new Path.Parameter(apiParam.name(), apiParam.description(), apiParam.required(), apiParam.dataType(), apiParam.format(), apiParam.defaultValue()));
             } else {
-                apiMethod.addParameter(new Path.Parameter(apiParam.name(),apiParam.description(),apiParam.required(),apiParam.dataType(),apiParam.format(),apiParam.defaultValue()));
+                addBaseParam(apiMethod, apiParam);
             }
         }
+    }
+
+    private static void addBaseParam(Path.ApiMethod apiMethod, Param apiParam) {
+        apiMethod.addParameter(new Path.Parameter(apiParam.name(), apiParam.in(), apiParam.description(), apiParam.required(), apiParam.dataType(), apiParam.format(), apiParam.defaultValue()));
     }
 
     /**
@@ -60,7 +65,7 @@ class Core {
      */
     private static void getParam(Path.ApiMethod apiMethod, Annotation annotation) {
         Param apiParam = (Param) annotation;
-        apiMethod.addParameter(new Path.Parameter(apiParam.name(),apiParam.description(),apiParam.required(),apiParam.dataType(),apiParam.format(),apiParam.defaultValue()));
+        addBaseParam(apiMethod, apiParam);
     }
 
     /**

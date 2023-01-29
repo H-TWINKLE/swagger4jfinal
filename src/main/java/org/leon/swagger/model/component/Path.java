@@ -128,12 +128,12 @@ public class Path {
         private String type;
         private String format;
         private String defaultValue;
-        
+
         public Parameter(String name, String description, boolean required, String type, String format, String defaultValue) {
             this.name = name;
             this.description = description;
             this.required = required;
-            this.in = "query";
+            this.in = "formData";
             this.type = type;
             this.format = format;
             this.defaultValue = defaultValue;
